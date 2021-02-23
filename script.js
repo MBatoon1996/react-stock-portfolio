@@ -89,6 +89,7 @@ var Portfolio = function (_React$Component) {
             portfolio.push(this.state.form);
 
             this.setState({
+                portfolio: portfolio,
                 form: {
                     name: '',
                     shares_owned: 0,

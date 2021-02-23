@@ -66,6 +66,7 @@ class Portfolio extends React.Component {
         portfolio.push(this.state.form);
 
         this.setState({
+            portfolio,
             form: {
                 name: '',
                 shares_owned: 0,
