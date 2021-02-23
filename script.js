@@ -36,6 +36,7 @@ var Portfolio = function (_React$Component) {
         // Note: api JSON data often come in underscore_styled like above
 
         _this.removeStock = _this.removeStock.bind(_this);
+        _this.handleChange = _this.handleChange.bind(_this);
         return _this;
     }
 
@@ -45,6 +46,18 @@ var Portfolio = function (_React$Component) {
             var portfolio = this.state.portfolio.slice(); // shallow copy
             portfolio.splice(index, 1); // remove value at index
 
+            this.setState({ portfolio: portfolio });
+        }
+    }, {
+        key: 'handleChange',
+        value: function handleChange(event, index) {
+            var portfolio = this.state.portfolio.slice(); // shallow copy
+            var _event$target = event.target,
+                name = _event$target.name,
+                value = _event$target.value;
+
+
+            portfolio[index][name] = value;
             this.setState({ portfolio: portfolio });
         }
     }, {
@@ -144,17 +157,23 @@ var Portfolio = function (_React$Component) {
                                         React.createElement(
                                             'td',
                                             null,
-                                            React.createElement('input', { type: 'number', name: 'shares_owned', value: shares_owned })
+                                            React.createElement('input', { onChange: function onChange(e) {
+                                                    return _this2.handleChange(e, index);
+                                                }, type: 'number', name: 'shares_owned', value: shares_owned })
                                         ),
                                         React.createElement(
                                             'td',
                                             null,
-                                            React.createElement('input', { type: 'number', name: 'cost_per_share', value: cost_per_share })
+                                            React.createElement('input', { onChange: function onChange(e) {
+                                                    return _this2.handleChange(e, index);
+                                                }, type: 'number', name: 'cost_per_share', value: cost_per_share })
                                         ),
                                         React.createElement(
                                             'td',
                                             null,
-                                            React.createElement('input', { type: 'number', name: 'market_price', value: market_price })
+                                            React.createElement('input', { onChange: function onChange(e) {
+                                                    return _this2.handleChange(e, index);
+                                                }, type: 'number', name: 'market_price', value: market_price })
                                         ),
                                         React.createElement(
                                             'td',

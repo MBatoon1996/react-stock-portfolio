@@ -25,6 +25,7 @@ class Portfolio extends React.Component {
         // Note: api JSON data often come in underscore_styled like above
 
         this.removeStock = this.removeStock.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     removeStock(index) {
@@ -32,6 +33,14 @@ class Portfolio extends React.Component {
         portfolio.splice(index, 1); // remove value at index
 
         this.setState({ portfolio })
+    }
+
+    handleChange(event, index) {
+        const portfolio = this.state.portfolio.slice(); // shallow copy
+        const { name, value } = event.target;
+
+        portfolio[index][name] = value;
+        this.setState({ portfolio });
     }
 
     render() {
@@ -74,9 +83,9 @@ class Portfolio extends React.Component {
                                     return (
                                         <tr key={index}>
                                             <td>{name}</td>
-                                            <td><input type="number" name="shares_owned" value={shares_owned} /></td>
-                                            <td><input type="number" name="cost_per_share" value={cost_per_share} /></td>
-                                            <td><input type="number" name="market_price" value={market_price} /></td>
+                                            <td><input onChange={e => this.handleChange(e, index)} type="number" name="shares_owned" value={shares_owned} /></td>
+                                            <td><input onChange={e => this.handleChange(e, index)} type="number" name="cost_per_share" value={cost_per_share} /></td>
+                                            <td><input onChange={e => this.handleChange(e, index)} type="number" name="market_price" value={market_price} /></td>
                                             <td>{market_value}</td>
                                             <td>{unrealized_gain_loss}</td>
                                             <td><button className="btn btn-light btn-sm" onClick={() => this.removeStock(index)}>remove</button></td>
