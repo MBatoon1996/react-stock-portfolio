@@ -34,12 +34,24 @@ var Portfolio = function (_React$Component) {
         };
 
         // Note: api JSON data often come in underscore_styled like above
+
+        _this.removeStock = _this.removeStock.bind(_this);
         return _this;
     }
 
     _createClass(Portfolio, [{
+        key: 'removeStock',
+        value: function removeStock(index) {
+            var portfolio = this.state.portfolio.slice(); // shallow copy
+            portfolio.splice(index, 1); // remove value at index
+
+            this.setState({ portfolio: portfolio });
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var portfolio = this.state.portfolio;
 
 
@@ -159,7 +171,9 @@ var Portfolio = function (_React$Component) {
                                             null,
                                             React.createElement(
                                                 'button',
-                                                { className: 'btn btn-light btn-sm' },
+                                                { className: 'btn btn-light btn-sm', onClick: function onClick() {
+                                                        return _this2.removeStock(index);
+                                                    } },
                                                 'remove'
                                             )
                                         )
